@@ -1,6 +1,10 @@
 # Exercise 06
   &emsp; This flutter app allows users to add items to their cart, and checkout those items. These are made possible using Flutter's state management (Providers).
 
+
+https://github.com/joanxrose/exer-6-state-management-joanxrose/assets/63910555/9192d8a6-c562-45e6-806a-09907aac6290
+
+
 ## Student Information
   &emsp; **Name:** Joan Rose C. Paelden  
   &emsp; **Student Number:** 2019-00154  
