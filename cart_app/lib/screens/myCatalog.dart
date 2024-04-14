@@ -22,31 +22,40 @@ class _MyCatalogState extends State<MyCatalog> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("My Catalog"),
+          title: const Text(
+            "CATALOG",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-        body: ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: const Icon(Icons.star),
-                title: Text(
-                    "${productsCatalog[index].name} - ${productsCatalog[index].price}"),
-                trailing: TextButton(
-                  child: const Text("Add"),
-                  onPressed: () {
-                    context
-                        .read<ShoppingCart>()
-                        .addItem(productsCatalog[index]);
+        body: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: const Icon(Icons.star),
+                  title: Text(
+                    "${productsCatalog[index].name} - Php ${productsCatalog[index].price}",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  trailing: TextButton(
+                    child: const Text("Add"),
+                    onPressed: () {
+                      context
+                          .read<ShoppingCart>()
+                          .addItem(productsCatalog[index]);
 
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("${productsCatalog[index].name} added!"),
-                      duration: const Duration(seconds: 1, milliseconds: 100),
-                      backgroundColor: Colors.green,
-                    ));
-                  },
-                ),
-              );
-            },
-            itemCount: productsCatalog.length),
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("${productsCatalog[index].name} added!"),
+                        duration: const Duration(seconds: 1, milliseconds: 100),
+                        // backgroundColor: Colors.green,
+                      ));
+                    },
+                  ),
+                );
+              },
+              itemCount: productsCatalog.length),
+        ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.shopping_cart),
           onPressed: () {

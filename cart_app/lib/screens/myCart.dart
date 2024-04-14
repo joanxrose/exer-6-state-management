@@ -1,3 +1,5 @@
+import 'package:cart_app/components/customButton.dart';
+import 'package:cart_app/components/noItems.dart';
 import 'package:cart_app/routes.dart/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,38 +15,54 @@ class MyCart extends StatelessWidget {
     List<Item> products = context.watch<ShoppingCart>().cart;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("My Cart")),
+      appBar: AppBar(
+        title: const Text(
+          "CART",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           getItems(context),
+          const Divider(),
           computeCost(),
-          //const Divider(height: 4, color: Colors.black),
-          Flexible(
-              child: Center(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                ElevatedButton(
-                    onPressed: () {
-                      if (products.isNotEmpty) {
-                        context.read<ShoppingCart>().removeAll();
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("No items in the cart!"),
-                          duration: Duration(seconds: 1, milliseconds: 100),
-                          backgroundColor: Colors.red,
-                        ));
-                      }
-                    },
-                    child: const Text("Reset")),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, checkoutPage);
-                    },
-                    child: const Text("Checkout")),
-              ]))),
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.only(bottom: 80),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, checkoutPage);
+                        },
+                        text: "Proceed to Checkout",
+                        backgroundColor: Colors.blue),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomButton(
+                        onPressed: () {
+                          if (products.isNotEmpty) {
+                            context.read<ShoppingCart>().removeAll();
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("No items in the cart!"),
+                              duration: Duration(seconds: 1, milliseconds: 100),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
+                        },
+                        text: "Reset",
+                        backgroundColor: Colors.grey),
+                  ]),
+            ),
+          )),
         ],
       ),
     );
@@ -54,9 +72,9 @@ class MyCart extends StatelessWidget {
     List<Item> products = context.watch<ShoppingCart>().cart;
     String productName = "";
     return products.isEmpty
-        ? const Padding(
-            padding: EdgeInsets.only(top: 100),
-            child: Text("No items yet!"),
+        ? const NoItemsComponent(
+            text: "No items in the cart!",
+            paddingTop: 50,
           )
         : Expanded(
             child: Column(
