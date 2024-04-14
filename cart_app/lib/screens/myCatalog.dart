@@ -1,3 +1,4 @@
+import 'package:cart_app/routes.dart/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cart_app/model/item.dart';
@@ -49,7 +50,7 @@ class _MyCatalogState extends State<MyCatalog> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.shopping_cart),
           onPressed: () {
-            Navigator.pushNamed(context, "/cart");
+            Navigator.pushNamed(context, cartPage);
           },
         ));
   }

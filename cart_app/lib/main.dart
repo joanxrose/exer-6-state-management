@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cart_app/provider/shoppingcart_provider.dart';
-import 'package:cart_app/screens/myCart.dart';
-import 'package:cart_app/screens/myCatalog.dart';
+import 'package:cart_app/routes.dart/constants.dart';
+import 'package:cart_app/routes.dart/mainRouting.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -19,15 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: "/products",
-      routes: {
-        "/cart": (context) => const MyCart(),
-        "/products": (context) => const MyCatalog(),
-        // "/checkout": (context) => MyCheckout()
-      },
+      initialRoute: catalogPage,
+      onGenerateRoute: MainRouting.generateRoute,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cart_app/routes.dart/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cart_app/components/computeCost.dart';
@@ -38,7 +39,11 @@ class MyCart extends StatelessWidget {
                       }
                     },
                     child: const Text("Reset")),
-                ElevatedButton(onPressed: () {}, child: const Text("Checkout")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, checkoutPage);
+                    },
+                    child: const Text("Checkout")),
               ]))),
         ],
       ),
