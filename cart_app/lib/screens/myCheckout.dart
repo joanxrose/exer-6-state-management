@@ -17,26 +17,20 @@ class MyCheckout extends StatelessWidget {
           children: [
             showItems(context),
             computeCost(),
-            ElevatedButton(
+            if (products.isNotEmpty)
+              ElevatedButton(
                 onPressed: () {
-                  if (products.isNotEmpty) {
-                    context.read<ShoppingCart>().removeAll();
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Payment successful!"),
-                      duration: Duration(seconds: 2, milliseconds: 200),
-                      backgroundColor: Colors.green,
-                    ));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("No items in the cart!"),
-                      duration: Duration(seconds: 1, milliseconds: 100),
-                      backgroundColor: Colors.red,
-                    ));
-                  }
+                  context.read<ShoppingCart>().removeAll();
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Payment successful!"),
+                    duration: Duration(seconds: 2, milliseconds: 200),
+                    backgroundColor: Colors.green,
+                  ));
                 },
-                child: const Text("Pay Now"))
+                child: const Text("Pay Now"),
+              ),
           ],
         ));
   }
@@ -46,7 +40,7 @@ class MyCheckout extends StatelessWidget {
     return products.isEmpty
         ? const Padding(
             padding: EdgeInsets.only(top: 100),
-            child: Text("No items yet!"),
+            child: Text("No items to checkout!"),
           )
         : Expanded(
             child: Column(
